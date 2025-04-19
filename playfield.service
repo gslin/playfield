@@ -3,7 +3,7 @@
 Description=Description
 
 [Service]
-ExecStart=/usr/bin/env mise exec uv@latest -- uv run flask run --host=unix:///tmp/playfield.sock
+ExecStart=/usr/bin/env mise exec uv@latest -- uv run gunicorn --bind unix:/tmp/playfield.sock --umask 0777 app:app app.py
 Restart=on-failure
 RestartSec=60
 Type=simple
