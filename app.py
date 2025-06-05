@@ -20,7 +20,7 @@ class MyJobs:
         api_currentcount_url = self.vault['ACTIVE_FITNESS_API_CURRENTCOUNT_URL']
 
         res = requests.get(
-            api_current_count_url,
+            api_currentcount_url,
             headers={'x-api-seed': api_seed, 'x-api-secret': api_secret}
         )
 
