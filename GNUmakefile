@@ -1,9 +1,12 @@
 #
 .DEFAULT_GOAL:=	test
-.PHONY:		deploy syntax test
+.PHONY:		clean deploy syntax test
 
 #
 # Targets
+clean::
+	rm -rf .venv
+
 deploy:: syntax
 	rsync -Favz --delete-after ./ ${SSH_USER}@${SSH_HOST}:playfield/
 	ssh ${SSH_USER}@${SSH_HOST} 'cd playfield && scripts/deploy.sh'
