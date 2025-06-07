@@ -2,22 +2,18 @@
 
 from apscheduler.schedulers.background import BackgroundScheduler
 from flask import Flask
+from . import vault
 
 import json
 import requests
 
 class MyJobs:
-    vault_json = '/srv/vault/playfield/default.current.json'
-    vault = {}
-
-    def __init__(self):
-        with open(self.vault_json, 'r') as f:
-            self.vault = json.load(f)
-
     def ActiveFitnessJob(self):
-        api_secret = self.vault['ACTIVE_FITNESS_API_SECRET']
-        api_seed = self.vault['ACTIVE_FITNESS_API_SEED']
-        api_currentcount_url = self.vault['ACTIVE_FITNESS_API_CURRENTCOUNT_URL']
+        v = vault.vault
+
+        api_secret = v['ACTIVE_FITNESS_API_SECRET']
+        api_seed = v['ACTIVE_FITNESS_API_SEED']
+        api_currentcount_url = v['ACTIVE_FITNESS_API_CURRENTCOUNT_URL']
 
         res = requests.get(
             api_currentcount_url,
