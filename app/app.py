@@ -1,10 +1,13 @@
 #!/usr/bin/env python3
 
+from . import db
 from . import vault
 from apscheduler.schedulers.background import BackgroundScheduler
 from flask import Flask
+from sqlalchemy import text
 
 import requests
+import time
 
 class MyJobs:
     def ActiveFitnessJob(self):
@@ -22,6 +25,17 @@ class MyJobs:
         with open('/tmp/active_fitness_currentcount.txt', 'a') as f:
             f.write(res.text)
             f.write('\n')
+
+        cnt = res.json()[0]['total']
+        now = int(time.time())
+
+        engine = db.DB().getEngine()
+        with engine.connect() as c:
+            c.execute(text('SET AUTOCOMMIT = ON'))
+            c.execute(
+                text('INSERT INTO activefitness_count (cnt, created_at) VALUES (:cnt, :created_at)'),
+                {'cnt': cnt, 'created_at': now}
+            )
 
 jobs = MyJobs()
 
