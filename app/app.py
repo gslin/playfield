@@ -4,7 +4,6 @@ from apscheduler.schedulers.background import BackgroundScheduler
 from flask import Flask
 from . import vault
 
-import json
 import requests
 
 class MyJobs:
