@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 
+from . import vault
 from apscheduler.schedulers.background import BackgroundScheduler
 from flask import Flask
-from . import vault
 
 import requests
 
 class MyJobs:
     def ActiveFitnessJob(self):
-        v = vault.vault
+        v = vault.Vault().getVault()
 
         api_secret = v['ACTIVE_FITNESS_API_SECRET']
         api_seed = v['ACTIVE_FITNESS_API_SEED']
