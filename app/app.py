@@ -48,3 +48,10 @@ app = Flask(__name__)
 @app.route('/')
 def index():
     return '<p>Hello, world!</p>'
+
+@app.route('/activefitness.json')
+def activefitness():
+    engine = db.DB().getEngine()
+    with engine.connect() as c:
+        rs = c.execute(text('SELECT COUNT(*) FROM activefitness_count ORDER BY created_at DESC;'))
+        return { 'cnt': rs.fetchone()[0] }
