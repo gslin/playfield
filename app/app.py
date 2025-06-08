@@ -33,7 +33,7 @@ class MyJobs:
         with engine.connect() as c:
             c.execute(text('SET AUTOCOMMIT = ON'))
             c.execute(
-                text('INSERT INTO activefitness_count (cnt, created_at) VALUES (:cnt, :created_at)'),
+                text('INSERT INTO activefitness_count (cnt, created_at) VALUES (:cnt, :created_at);'),
                 {'cnt': cnt, 'created_at': now}
             )
 
