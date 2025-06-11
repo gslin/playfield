@@ -6,6 +6,7 @@ from apscheduler.schedulers.background import BackgroundScheduler
 from flask import Flask
 from sqlalchemy import text
 
+import datetime
 import requests
 import time
 
@@ -23,6 +24,8 @@ class MyJobs:
         )
 
         with open('/tmp/active_fitness_currentcount.txt', 'a') as f:
+            now = datetime.datetime.now().isoformat()
+            f.write(now)
             f.write(res.text)
             f.write('\n')
 
