@@ -25,7 +25,7 @@ class MyJobs:
 
         with open('/tmp/active_fitness_currentcount.txt', 'a') as f:
             now = datetime.datetime.now().isoformat()
-            f.write(now)
+            f.write(now + '\n')
             f.write(res.text)
             f.write('\n')
 
