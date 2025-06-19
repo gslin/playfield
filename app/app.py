@@ -14,6 +14,10 @@ class MyJobs:
     def ActiveFitnessJob(self):
         v = vault.Vault().getVault()
 
+        with open('/tmp/active_fitness_currentcount.txt', 'a') as f:
+            now = datetime.datetime.now().isoformat()
+            f.write('ActiveFitnessJob() triggered\n')
+
         api_secret = v['ACTIVE_FITNESS_API_SECRET']
         api_seed = v['ACTIVE_FITNESS_API_SEED']
         api_currentcount_url = v['ACTIVE_FITNESS_API_CURRENTCOUNT_URL']
