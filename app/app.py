@@ -16,6 +16,7 @@ class MyJobs:
 
         with open('/tmp/active_fitness_currentcount.txt', 'a') as f:
             now = datetime.datetime.now().isoformat()
+            f.write(now + '\n')
             f.write('ActiveFitnessJob() triggered\n')
 
         api_secret = v['ACTIVE_FITNESS_API_SECRET']
