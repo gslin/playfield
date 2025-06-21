@@ -7,6 +7,7 @@ from flask import Flask
 from sqlalchemy import text
 
 import datetime
+import gc
 import requests
 import time
 
@@ -44,6 +45,9 @@ class MyJobs:
                 text('INSERT INTO activefitness_count (cnt, created_at) VALUES (:cnt, :created_at);'),
                 {'cnt': cnt, 'created_at': now}
             )
+
+        del res
+        gc.collect()
 
 jobs = MyJobs()
 
