@@ -46,13 +46,14 @@ class MyJobs:
                 {'cnt': cnt, 'created_at': now}
             )
 
-        del res
+    def GCJob(self):
         gc.collect()
 
 jobs = MyJobs()
 
 scheduler = BackgroundScheduler()
 scheduler.add_job(jobs.ActiveFitnessJob, 'interval', minutes=1)
+scheduler.add_job(jobs.GCJob, 'interval', minutes=30)
 scheduler.start()
 
 app = Flask(__name__)
